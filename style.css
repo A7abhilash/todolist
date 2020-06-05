@@ -31,7 +31,7 @@ ul{
 }
 li{
     background-color: #37474f;
-    height: 50px;
+    min-height: 50px;
     line-height: 50px;
     padding: 0 0 0 10px;
 }
