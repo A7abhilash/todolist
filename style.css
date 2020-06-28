@@ -1,14 +1,14 @@
+body{
+    user-select: none;
+}
 header{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 50px;
 }
-.list{
-    border: 2px solid black;
-    border-radius: 5px;
-    width: 300px;
-    min-height: 65px;
+.alert{
+    min-height: 3rem;
 }
 #input{
     border-radius: 50px 0 0 50px;
@@ -20,32 +20,29 @@ header{
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px;
+    border: 1px ridge rgb(180, 168, 168);
 }
-ul{
-    list-style: none;
-    height: auto;
-    background-color: rgb(230, 66, 66);
-    padding: 5px;
-    color: #f7f7f7;
-    border-radius: 5px;
-}
-li{
-    background-color: #37474f;
+.eachList{
+    align-items: center;
+    width: 250px;
+    background-color: #d5d6d6;
     min-height: 50px;
-    line-height: 50px;
-    padding: 0 0 0 10px;
+    line-height: 20px;
 }
-li:nth-child(2n){
-    background-color: #455a64;
+.eachList:nth-child(2n){
+    background-color: #c5c8c9;
 }
-i{
-    color: black;
-    padding: 15px;
-    width: 40px;
+#edit , #remove{
     text-align: center;
-    float: right;
     cursor: pointer;
 }
-i:active{
+#edit:active , #remove:active{
     color: white;
+}
+#edit{
+    color: rgb(140, 216, 25);
+}
+#remove{
+    color: rgb(241, 48, 48);
 }

@@ -3,40 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap/css/fontawesome-free-5.13.0-web/css/all.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="contract.png">
     <title>TO DO LIST</title>
 </head>
 <body>
-    <header class="text-center">
-        <h1>To Do List APP</h1>
+    <header class="text-center jumbotron m-md-5">
+        <h1>To Do List</h1>
         <h5>Eat-Sleep-Code-Repeat</h5>
     </header>
     <section>
         <div class="container">
             <div class="row m-md-5 m-3">
-                <div class="col-md-6 order-md-last enter">
-                    <div class="row">
-                        <div class="col-9 p-0">
-                            <input id="input" type="text" placeholder="New note" class="form-control">
+                <div class="col-md-6 order-md-last enter bg-light">
+                    <form class="form">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <p class="alert"></p>
+                            </div> 
+                            <div class="col-9 p-0">
+                                <input id="input" type="text" placeholder="New note" class="form-control">
+                            </div>
+                            <div class="col-3 p-0">
+                                <button type="submit" class="btn btn-primary" id="btn">Enter</button>
+                            </div>
                         </div>
-                        <div class="col-3 p-0">
-                            <button class="btn btn-primary" id="btn">Enter</button>
-                        </div>
-                    </div>
+                    </form>
+                    
                     <div class="my-3">
-                        <ul class="list"></ul>
+                        <div class="row">
+                            <div class="list justify-content-center"></div>
+                        </div>
                     </div>
+                
+                    <h6>Total Count: <strong class="count"></strong></h6>
                 </div>
-                <div class="col-md-6 order-md-first">
-                    <img src="to-do-list.png" class="img-fluid text-center" width="500px" alt="to-do-list">
+                
+                <div class="col-md-6 order-md-first text-center">
+                    <img src="to-do-list.png" class="img-fluid" width="300px" alt="to-do-list">
                 </div>
             </div>
-        </div>
+        </div> 
     </section>
+    
 </body>
 <script src="bootstrap/js/jQuery.js"></script>
+<script src="bootstrap/js/jqueryui/jquery-ui.js"></script>
 <script src="main.js"></script>
 </html>
