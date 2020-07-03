@@ -28,7 +28,17 @@ function addItem(event){
 
         displayAlert("Item Added Successfully" , "success");
        
-        list.append(`<div id=${key} class="eachList row"><div class="col-8">${value}</div><div class="col-2"><i id="edit" class="fas fa-edit"></i></div><div class="col-2"><i id="remove" class="fas fa-trash"></i></div></div>`);
+        list.append(`
+            <div id=${key} class="eachList row">
+                <div class="col-8">${value}</div>
+                <div class="col-2">
+                    <i id="edit" class="fas fa-edit"></i>
+                </div>
+                <div class="col-2">
+                    <i id="remove" class="fas fa-trash"></i>
+                </div>
+            </div>
+        `);
         
         $('.eachList #edit').click(editItem);
         $('.eachList #remove').click(removeItem);
@@ -45,10 +55,10 @@ function addItem(event){
         editElement.css('visibility','visible');
         edit.textContent=value;
         
-        let x = editElement[0].id;
+        let x = editElement[0].id; //key
         //console.log(x);
         
-        editLocalStorage(x,value);
+        addToLocalStorage(x,value);
         setBackToDefault();
     }
     else //Empty input
@@ -83,13 +93,11 @@ function setBackToDefault(){
 // Edit item
 function editItem(event){
     editElement = $(this).parent().parent();
-    edit = editElement[0].firstChild;
+    edit = editElement[0].children[0];
     //console.log(edit);
     input.val(edit.textContent);
     editElement.css('visibility','hidden');
-    let x = editElement[0].id;
-    //console.log(x);
-
+    
     editFlag=true;
     submit.html('Edit');
 }
@@ -122,20 +130,28 @@ function removeFromLocalStorage(key){
     localStorage.removeItem(key);
 }
 
-function editLocalStorage(key,value){
-    localStorage.setItem(key,value);
-}
-
 //****** SETUP ITEMS *****
 window.onload = function(){
     setBackToDefault();
     for(let i=0; i<localStorage.length;i++)
     {
         //console.log(localStorage.getItem(id[i]));
-        displayAlert("Items Loaded Successfully" , "success");
+        displayAlert("Items Loaded Successfully" , "primary");
         
         var key = localStorage.key(i);
-        list.append(`<div id=${key} class="eachList row"><div class="col-8">${localStorage.getItem(key)}</div><div class="col-2"><i id="edit" class="fas fa-edit"></i></div><div class="col-2"><i id="remove" class="fas fa-trash"></i></div></div>`);
+        list.append(`
+            <div id=${key} class="eachList row">
+                <div class="col-8">
+                    ${localStorage.getItem(key)}
+                </div>
+                <div class="col-2">
+                    <i id="edit" class="fas fa-edit"></i>
+                </div>
+                <div class="col-2">
+                    <i id="remove" class="fas fa-trash"></i>
+                </div>
+            </div>
+        `);
         
         $('.eachList #edit').click(editItem);
         $('.eachList #remove').click(removeItem);
