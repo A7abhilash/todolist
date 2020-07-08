@@ -133,7 +133,7 @@ function removeFromLocalStorage(key){
 //****** SETUP ITEMS *****
 window.onload = function(){
     setBackToDefault();
-    for(let i=0; i<localStorage.length;i++)
+    for(let i=0;i<localStorage.length;i++)
     {
         //console.log(localStorage.getItem(id[i]));
         displayAlert("Items Loaded Successfully" , "primary");
