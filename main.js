@@ -43,7 +43,7 @@ function addItem(event){
         $('.eachList #edit').click(editItem);
         $('.eachList #remove').click(removeItem);
         //add to local storage
-        addtoLocalStorage(key,value);
+        addToLocalStorage(key,value);
         //set back to default
         setBackToDefault();
         
@@ -97,9 +97,11 @@ function editItem(event){
     //console.log(edit);
     input.val(edit.textContent);
     editElement.css('visibility','hidden');
+    //console.log(edit.textContent);
     
     editFlag=true;
     submit.html('Edit');
+    event.stopImmediatePropagation();
 }
 
 //Remove Item
@@ -121,7 +123,7 @@ function removeItem(event){
 }
 
 //****** LOCAL STRORAGE *****
-function addtoLocalStorage(key,value){
+function addToLocalStorage(key,value){
     //console.log("local")
     localStorage.setItem(key,value);
 }
