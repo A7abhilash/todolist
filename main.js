@@ -135,16 +135,25 @@ function removeFromLocalStorage(key){
 //****** SETUP ITEMS *****
 window.onload = function(){
     setBackToDefault();
+    
+    var keys = [];
+    for(let j=0;j<localStorage.length;j++)
+    {
+        keys.push(localStorage.key(j));
+    }
+    keys.sort((a,b) => a-b)
+    // console.log(keys);
+
     for(let i=0;i<localStorage.length;i++)
     {
         //console.log(localStorage.getItem(id[i]));
         displayAlert("Items Loaded Successfully" , "primary");
         
-        var key = localStorage.key(i);
+        // var key = localStorage.key(i);
         list.append(`
-            <div id=${key} class="eachList row">
+            <div id=${keys[i]} class="eachList row">
                 <div class="col-8">
-                    ${localStorage.getItem(key)}
+                    ${localStorage.getItem(keys[i])}
                 </div>
                 <div class="col-2">
                     <i id="edit" class="fas fa-edit"></i>
