@@ -1,9 +1,9 @@
- //****** SELECT ITEMS  *****
-var alert = $('.alert')
+//****** SELECT ITEMS  *****
+var alert = $(".alert");
 const form = $(".form");
-var input = $('#input');
-const submit = $('#btn');
-var list = $('.list');
+var input = $("#input");
+const submit = $("#btn");
+var list = $(".list");
 
 //Edit option
 let editElement;
@@ -11,24 +11,24 @@ let edit;
 let editFlag = false;
 
 //****** EVENT LISTNER *****
-$('form').submit(addItem);
+$("form").submit(addItem);
 
 //****** FUNCTIONS *****
 
 //Adding a new item into the list
-function addItem(event){
-    event.preventDefault(); // To prevent adding empty items
-    //console.log(input.val());
-    const value = input.val();
-    const key = new Date().getTime().toString(); //Simply written to get a unique number to set it as id
-    //console.log(id);
-    if(value!=='' && editFlag === false) // Enter
-    {
-        //console.log("Enter");
+function addItem(event) {
+  event.preventDefault(); // To prevent adding empty items
+  //console.log(input.val());
+  const value = input.val();
+  const key = new Date().getTime().toString(); //Simply written to get a unique number to set it as id
+  //console.log(id);
+  if (value !== "" && editFlag === false) {
+    // Enter
+    //console.log("Enter");
 
-        displayAlert("Item Added Successfully" , "success");
-       
-        list.append(`
+    displayAlert("Item Added Successfully", "success");
+
+    list.append(`
             <div id=${key} class="eachList row">
                 <div class="col-8">${value}</div>
                 <div class="col-2">
@@ -39,118 +39,121 @@ function addItem(event){
                 </div>
             </div>
         `);
-        
-        $('.eachList #edit').click(editItem);
-        $('.eachList #remove').click(removeItem);
-        //add to local storage
-        addToLocalStorage(key,value);
-        //set back to default
-        setBackToDefault();
-        
-    }
-    else if(value!=='' && editFlag === true) //Edit
-    {
-        //console.log("Edit");
-        displayAlert("Item Edited Successfully","success");
-        editElement.css('visibility','visible');
-        edit.textContent=value;
-        
-        let x = editElement[0].id; //key
-        //console.log(x);
-        
-        addToLocalStorage(x,value);
-        setBackToDefault();
-    }
-    else //Empty input
-    {
-        //console.log("Empty");
-        displayAlert("Empty Value" , "warning");
-    }
+
+    $(".eachList #edit").click(editItem);
+    $(".eachList #remove").click(removeItem);
+    //add to local storage
+    addToLocalStorage(key, value);
+    //set back to default
+    setBackToDefault();
+  } else if (value !== "" && editFlag === true) {
+    //Edit
+    //console.log("Edit");
+    displayAlert("Item Edited Successfully", "success");
+    editElement.css("visibility", "visible");
+    edit.textContent = value;
+
+    let x = editElement[0].id; //key
+    //console.log(x);
+
+    addToLocalStorage(x, value);
+    setBackToDefault();
+  } //Empty input
+  else {
+    //console.log("Empty");
+    displayAlert("Empty Value", "warning");
+  }
 }
 
 //Display ALERT
-function displayAlert(text,bg)
-{
-    alert.html(text) 
-    alert.addClass(`bg-${bg}`);
+function displayAlert(text, bg) {
+  alert.html(text);
+  alert.addClass(`bg-${bg}`);
 
-//Remove ALERT
-    setTimeout(function(){
-        alert.html('') 
-        alert.removeClass(`bg-${bg}`);
-    },1500);
+  //Remove ALERT
+  setTimeout(function () {
+    alert.html("");
+    alert.removeClass(`bg-${bg}`);
+  }, 1500);
 }
 
 //Set back to default is used to remove the item in the placeholder
-function setBackToDefault(){
-    //console.log("set back")
-    input.val('');
-    editFlag = false;
-    submit.html("Enter")
-    $('.count').html(localStorage.length);
+function setBackToDefault() {
+  //console.log("set back")
+  input.val("");
+  editFlag = false;
+  submit.html("Enter");
+  $(".count").html(localStorage.length);
 }
 
 // Edit item
-function editItem(event){
-    editElement = $(this).parent().parent();
-    edit = editElement[0].children[0];
-    //console.log(edit);
-    input.val(edit.textContent);
-    editElement.css('visibility','hidden');
-    //console.log(edit.textContent);
-    
-    editFlag=true;
-    submit.html('Edit');
-    event.stopImmediatePropagation();
+function editItem(event) {
+  editElement = $(this).parent().parent();
+  edit = editElement[0].children[0];
+  //console.log(edit);
+  input.val(edit.textContent);
+  editElement.css("visibility", "hidden");
+  //console.log(edit.textContent);
+
+  editFlag = true;
+  submit.html("Edit");
+  event.stopImmediatePropagation();
 }
 
 //Remove Item
-function removeItem(event){
-    //console.log('remove')
-    const element = $(this).parent().parent();
-    //console.log(element);
-    let key = element[0].id;
-    //console.log(key);
+function removeItem(event) {
+  //console.log('remove')
+  const element = $(this).parent().parent();
+  //console.log(element);
+  let key = element[0].id;
+  //console.log(key);
 
-    removeFromLocalStorage(key);
+  removeFromLocalStorage(key);
 
-    element.fadeOut(500 ,function(){
-        $(this).remove();
-        setBackToDefault();       
-    });
+  element.fadeOut(500, function () {
+    $(this).remove();
+    setBackToDefault();
+  });
 
-    displayAlert("Item Removed Successfully","danger")
+  displayAlert("Item Removed Successfully", "danger");
 }
 
 //****** LOCAL STRORAGE *****
-function addToLocalStorage(key,value){
-    //console.log("local")
-    localStorage.setItem(key,value);
+function addToLocalStorage(key, value) {
+  //console.log("local")
+  localStorage.setItem(key, value);
 }
 
-function removeFromLocalStorage(key){
-    localStorage.removeItem(key);
+function removeFromLocalStorage(key) {
+  localStorage.removeItem(key);
 }
 
 //****** SETUP ITEMS *****
-window.onload = function(){
-    setBackToDefault();
-    
-    var keys = [];
-    for(let j=0;j<localStorage.length;j++)
-    {
-        keys.push(localStorage.key(j));
-    }
-    keys.sort((a,b) => a-b)
-    // console.log(keys);
+window.onload = function () {
+  const currentURL = location.href;
+  console.log(currentURL);
+  if (
+    currentURL == "https://a7abhilash.github.io/todolist" ||
+    currentURL == "https://a7abhilash.github.io/todolist/"
+  ) {
+    alert("Website Domain has been changed");
+    return;
+  }
+  setBackToDefault();
 
-    for(let i=0;i<localStorage.length;i++)
-    {
-        //console.log(localStorage.getItem(id[i]));
-        displayAlert("Items Loaded Successfully" , "primary");
-        
-        // var key = localStorage.key(i);
-        list.append(`
+  var keys = [];
+  for (let j = 0; j < localStorage.length; j++) {
+    keys.push(localStorage.key(j));
+  }
+  keys.sort((a, b) => a - b);
+  // console.log(keys);
+
+  for (let i = 0; i < localStorage.length; i++) {
+    //console.log(localStorage.getItem(id[i]));
+    displayAlert("Items Loaded Successfully", "primary");
+
+    // var key = localStorage.key(i);
+    list.append(`
             <div id=${keys[i]} class="eachList row">
                 <div class="col-8">
                     ${localStorage.getItem(keys[i])}
@@ -163,14 +166,13 @@ window.onload = function(){
                 </div>
             </div>
         `);
-        
-        $('.eachList #edit').click(editItem);
-        $('.eachList #remove').click(removeItem);
-    }
+
+    $(".eachList #edit").click(editItem);
+    $(".eachList #remove").click(removeItem);
+  }
 };
 
 //****** Remove Suggestions from INPUT ****
 input.autocomplete({
-    source:[]
+  source: [],
 });
-
