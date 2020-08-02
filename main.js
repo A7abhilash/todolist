@@ -131,10 +131,13 @@ function removeFromLocalStorage(key) {
 //****** SETUP ITEMS *****
 window.onload = function () {
   const currentURL = location.href;
+  const localhost = "http://127.0.0.1:5500/";
+  const olderHost = "https://a7abhilash.github.io/todolist/";
   console.log(currentURL);
-  if (currentURL == "https://a7abhilash.github.io/todolist/") {
+  if (currentURL == olderHost) {
     // window.alert("Website Domain has been changed");
-    $("html").css("display", "none");
+    $("header, section").css("display", "none");
+    $("article").css("display", "block");
     return;
   }
   setBackToDefault();
