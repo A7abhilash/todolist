@@ -133,7 +133,8 @@ window.onload = function () {
   const currentURL = location.href;
   console.log(currentURL);
   if (currentURL == "https://a7abhilash.github.io/todolist/") {
-    window.alert("Website Domain has been changed");
+    // window.alert("Website Domain has been changed");
+    $("html").css("display", "none");
     return;
   }
   setBackToDefault();
