@@ -132,11 +132,8 @@ function removeFromLocalStorage(key) {
 window.onload = function () {
   const currentURL = location.href;
   console.log(currentURL);
-  if (
-    currentURL == "https://a7abhilash.github.io/todolist" ||
-    currentURL == "https://a7abhilash.github.io/todolist/"
-  ) {
-    alert("Website Domain has been changed");
+  if (currentURL == "https://a7abhilash.github.io/todolist/") {
+    window.alert("Website Domain has been changed");
     return;
   }
   setBackToDefault();
