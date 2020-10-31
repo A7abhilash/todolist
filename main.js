@@ -130,32 +130,19 @@ function removeFromLocalStorage(key) {
 
 //****** SETUP ITEMS *****
 window.onload = function () {
-  const currentURL = location.href;
-  const localhost = "http://127.0.0.1:5500/";
-  const olderHost = "https://a7abhilash.github.io/todolist/";
-  console.log(currentURL);
-  if (currentURL == olderHost) {
-    // window.alert("Website Domain has been changed");
-    $("section").css("display", "none");
-    $("article").css("display", "block");
-  } else {
-    setBackToDefault();
-    $("section").css("display", "block");
-    $("article").css("display", "none");
+  var keys = [];
+  for (let j = 0; j < localStorage.length; j++) {
+    keys.push(localStorage.key(j));
+  }
+  keys.sort((a, b) => a - b);
+  // console.log(keys);
 
-    var keys = [];
-    for (let j = 0; j < localStorage.length; j++) {
-      keys.push(localStorage.key(j));
-    }
-    keys.sort((a, b) => a - b);
-    // console.log(keys);
+  for (let i = 0; i < localStorage.length; i++) {
+    //console.log(localStorage.getItem(id[i]));
+    displayAlert("Items Loaded Successfully", "primary");
 
-    for (let i = 0; i < localStorage.length; i++) {
-      //console.log(localStorage.getItem(id[i]));
-      displayAlert("Items Loaded Successfully", "primary");
-
-      // var key = localStorage.key(i);
-      list.append(`
+    // var key = localStorage.key(i);
+    list.append(`
             <div id=${keys[i]} class="eachList row">
                 <div class="col-8">
                     ${localStorage.getItem(keys[i])}
@@ -169,9 +156,8 @@ window.onload = function () {
             </div>
         `);
 
-      $(".eachList #edit").click(editItem);
-      $(".eachList #remove").click(removeItem);
-    }
+    $(".eachList #edit").click(editItem);
+    $(".eachList #remove").click(removeItem);
   }
 };
 
