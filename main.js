@@ -130,6 +130,7 @@ function removeFromLocalStorage(key) {
 
 //****** SETUP ITEMS *****
 window.onload = function () {
+  setBackToDefault();
   var keys = [];
   for (let j = 0; j < localStorage.length; j++) {
     keys.push(localStorage.key(j));
@@ -137,6 +138,7 @@ window.onload = function () {
   keys.sort((a, b) => a - b);
   // console.log(keys);
 
+  if(localStorage.length){
   for (let i = 0; i < localStorage.length; i++) {
     //console.log(localStorage.getItem(id[i]));
     displayAlert("Items Loaded Successfully", "primary");
@@ -159,9 +161,7 @@ window.onload = function () {
     $(".eachList #edit").click(editItem);
     $(".eachList #remove").click(removeItem);
   }
+}else{
+  displayAlert("No items found in your list!!!", "info");
+}  
 };
-
-//****** Remove Suggestions from INPUT ****
-input.autocomplete({
-  source: [],
-});
